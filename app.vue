@@ -4,18 +4,20 @@
     <div class="container">
       <TheHeader />
       <TheMenu />
+      <Product />
     </div>
   </div>
 </template>
 
 <style lang="scss">
-@import "./assets/style/style.css";
+@import "assets/styles/main.scss";
 
 body {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
   font-family: Onest, sans-serif;
+  background: #e0ffaf;
 }
 
 .container {

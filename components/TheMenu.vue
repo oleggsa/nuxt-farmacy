@@ -1,8 +1,8 @@
 <template>
   <div class="menu">
     <ul>
-      <li>
-        <RouterLink v-for="item in links" key="name" to="/">{{item.name}}</RouterLink>
+      <li v-for="item in links" :key="item.name">
+        <RouterLink to={{item.link}}>{{item.name}}</RouterLink>
       </li>
     </ul>
   </div>
@@ -34,12 +34,12 @@ ul {
   justify-content: center;
   li {
     list-style: none;
+    &:not(:last-child) a {
+      margin-right: 20px;
+    }
     a {
       text-decoration: none;
       color: black;
-      &:not(:last-child) {
-        margin-right: 20px;
-      }
     }
   }
 }

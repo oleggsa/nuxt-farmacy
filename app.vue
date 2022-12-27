@@ -2,7 +2,8 @@
   <div>
     <HeaderNotification />
     <div class="container">
-
+      <TheHeader />
+      <TheMenu />
     </div>
   </div>
 </template>
@@ -18,6 +19,7 @@ body {
 }
 
 .container {
-
+ max-width: 1296px;
+  margin: 0 auto;
 }
 </style>

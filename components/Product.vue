@@ -7,7 +7,7 @@
       </div>
       <div class="tabs">
         <div class="tabs-btn">
-          <ul class="buttons">
+          <ul class="tabs-buttons">
             <li v-for="item in tabs" :key='item.name' @click="changeTab(item.id)" :class="{ active: this.id === item.id}">{{item.name}}</li>
           </ul>
           <div class="underline"></div>
@@ -37,9 +37,9 @@
         <div class="left">
           <img src="../assets/icons/drugs-blue.svg" alt="drugs">
           <div class="amount">
-            <span><b>В упаковці:</b></span>
-            <span>{{ parameters.amount }} капсул по {{parameters.dose}} мг</span>
-            <span v-if="parameters.months === 1">{{ parameters.months }} місяць прийому</span>
+            <span class="first">В упаковці:</span>
+            <span class="second">{{ parameters.amount }} капсул по {{parameters.dose}} мг</span>
+            <span class="third" v-if="parameters.months === 1">{{ parameters.months }} місяць прийому</span>
             <span v-if="parameters.months > 1 && parameters.months < 5">{{ parameters.months }} місяці прийому</span>
             <span v-if="parameters.months >= 5">{{ parameters.months }} місяців прийому</span>
           </div>
@@ -48,6 +48,14 @@
           <div class="oldprice">{{parameters.oldprice}} ₴</div>
           <div class="price">{{parameters.price}} ₴</div>
         </div>
+      </div>
+      <div class="buttons">
+        <div class="counter">
+          <button class="decrement" @click="decrement">-</button>
+          <div class="number">{{ this.count }}</div>
+          <button class="increment" @click="increment">+</button>
+        </div>
+        <div class="cart-btn">До кошика</div>
       </div>
     </div>
     <div class="images">
@@ -88,12 +96,21 @@ export default {
               '<b>Курс прийому:</b> 2-3 місяці, після чого зробити перерву 1-2 місяці або перейти на Омега-3 із Тунця.'
           ]}
       ],
-      parameters: {amount: 120, dose: 500, months: 1, price: 489, oldprice: 963}
+      parameters: {amount: 120, dose: 500, months: 1, price: 489, oldprice: 963},
+      count: 1
     }
   },
   methods: {
     changeTab(id) {
       this.id = id;
+    },
+    increment() {
+      this.count++;
+    },
+    decrement() {
+      if (this.count > 1) {
+        this.count--;
+      }
     }
   }
 }
@@ -130,7 +147,7 @@ export default {
       margin-top: 32px;
       &-btn {
         max-width: 580px;
-        & .buttons {
+        & .tabs-buttons {
           padding: 0;
           display: flex;
           justify-content: space-between;
@@ -195,6 +212,15 @@ export default {
       display: flex;
       flex-direction: column;
       margin-left: 32px;
+      font-size: 18px;
+      line-height: 23px;
+      color: #00284F;
+      & .first {
+        font-weight: 700;
+      }
+      & .third {
+        opacity: 0.5;
+      }
     }
   }
   & .right {
@@ -222,6 +248,44 @@ export default {
         transform: rotate(12deg);
       }
     }
+  }
+}
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 64px;
+  & .counter {
+    display: flex;
+    align-items: center;
+    font-size: 28px;
+    line-height: 35px;
+    & .number {
+      background: rgba(255, 255, 255, 0.7);
+      padding: 5px 13px;
+      border-radius: 7px;
+      color: #00284F;
+    }
+    & .increment,
+      .decrement {
+      cursor: pointer;
+      border: none;
+      background: none;
+      padding: 10px;
+      font-size: 20px;
+      color: rgba(0, 40, 79, 0.4);
+    }
+  }
+  & .cart-btn {
+    cursor: pointer;
+    background: #69C522;
+    border-radius: 40px;
+    padding: 15px 170px;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 27px;
+    color: #FFFFFF;
   }
 }
 </style>
